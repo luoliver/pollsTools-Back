@@ -25,7 +25,7 @@ class PollstoolsApplicationTests {
 		usuario.setContrasena(encoder.encode("12345678"));
 		usuario.setId(2);
 		usuario.setUsuario("Admin1");
-		UsuarioDTO retornado = usuarioService.crearUsuario(usuario);
+		UsuarioDTO retornado = usuarioService.crearUsuarioAdminsitrador(usuario);
 		assertTrue(retornado.getContrasena().equalsIgnoreCase(usuario.getContrasena()));
 	}
 

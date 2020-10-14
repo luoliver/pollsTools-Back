@@ -13,7 +13,7 @@ public class Rol {
 	@Id
 	private int idRol;
 	
-	@Column(name="nombre", length = 50)
+	@Column(name="nombre", length = 50, nullable = false)
 	private String nombre;
 	
 	@OneToMany(mappedBy = "rolUsuario")

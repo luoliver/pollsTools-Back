@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,34 +15,35 @@ public class Usuario {
 
 	@Id
 	@Column(name = "idUsuario")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "usuario", length = 50)
+	@Column(name = "usuario", length = 50, nullable = false)
 	private String usuario;
 	
-	@Column(name = "contrasena", length = 100)
+	@Column(name = "contrasena", length = 100, nullable = false)
 	private String contrasena;
 	
-	@Column(name = "primerNombre", length = 50)
+	@Column(name = "primerNombre", length = 50, nullable = false)
 	private String primerNombre;
 	
 	@Column(name = "segundoNombre", length = 50)
 	private String segundoNombre;
 	
-	@Column(name = "primerApellido", length = 50)
+	@Column(name = "primerApellido", length = 50, nullable = false)
 	private String primerApellido;
 	
 	@Column(name = "segundoApellido", length = 50)
 	private String segundoApellido;
 	
-	@Column(name = "genero", length = 1)
+	@Column(name = "genero", length = 1, nullable = false)
 	private String genero;
 	
-	@Column(name="fechaNacimiento")
+	@Column(name="fechaNacimiento", nullable = false)
 	private Date fechaNacimiento;
 	
 	@ManyToOne
-	@JoinColumn(name = "idRol")
+	@JoinColumn(name = "idRol", nullable = false)
 	private Rol rolUsuario;
 
 	public Integer getId() {
