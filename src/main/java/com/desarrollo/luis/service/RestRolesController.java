@@ -3,6 +3,7 @@ package com.desarrollo.luis.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.desarrollo.luis.dto.RolDTO;
 
 @RestController
 @RequestMapping("/roles")
+@CrossOrigin("*")
 public class RestRolesController {
 
 	@Autowired
@@ -29,17 +31,4 @@ public class RestRolesController {
 	public RolDTO consultarPorId(@PathVariable String nombreRol){
 		return rolService.findRolByNombre(nombreRol);
 	}
-	
-//	@PostMapping
-//	public void guardar(@RequestBody Rol rol) {
-//		
-//	}
-//	
-//	@PutMapping
-//	public void modificar(@RequestBody Rol rol) {
-//	}
-//	
-//	@DeleteMapping(value = "/{id}")
-//	public void delete(@PathParam("id") Integer id) {
-//	}
 }

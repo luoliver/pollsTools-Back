@@ -4,8 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.desarrollo.luis.enums.EnumRol;
 
 @Entity
 public class Rol {
@@ -13,8 +17,9 @@ public class Rol {
 	@Id
 	private int idRol;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="nombre", length = 50, nullable = false)
-	private String nombre;
+	private EnumRol nombre;
 	
 	@OneToMany(mappedBy = "rolUsuario")
 	private List<Usuario> usuario;
@@ -27,11 +32,11 @@ public class Rol {
 		this.idRol = idRol;
 	}
 
-	public String getNombre() {
+	public EnumRol getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(EnumRol nombre) {
 		this.nombre = nombre;
 	}
 

@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.desarrollo.luis.model.Usuario;
 
-public interface IUsuarioDao extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioDAO extends JpaRepository<Usuario, Integer> {
 
 	public Usuario findByUsuario(String usuario);
+
+	public boolean existsByUsuario(String usuario);
 }

@@ -1,8 +1,13 @@
-package com.desarrollo.luis.security;
+package com.desarrollo.luis.service.request;
+
+import javax.validation.constraints.NotBlank;
 
 public class AuthenticationRequest {
 
+	@NotBlank
 	private String usuario;
+	
+	@NotBlank
 	private String contrasena;
 	
 	public String getUsuario() {

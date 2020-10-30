@@ -2,31 +2,20 @@ package com.desarrollo.luis.dto;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
-@Entity
 public class CategoriaDTO {
 
-	@Id
-	@Column(name="idCategoria")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "nombre", length = 50, nullable = false)
+	@NotBlank
 	private String nombre;
 	
-	@Column(name = "codigo", length = 50, nullable = false)
+	@NotBlank
 	private String codigo;
 	
-	@Column(name = "descripcion", length = 150, nullable = true)
 	private String descripcion;
 	
-	@OneToMany(mappedBy = "categoria")
 	private List<EncuestaDTO> encuestas;
 
 	public Integer getId() {

@@ -49,6 +49,8 @@ public class EncuestaConverter {
 			encuestaConvertido.setPreguntas(PreguntaConverter.converterListaModeloADtoCompleto(encuestaAConvertir.getPreguntas()));
 		if(encuestaAConvertir.getCategoria() != null)
 			encuestaConvertido.setCategoria(CategoriaConverter.converterModeloADtoSimple(encuestaAConvertir.getCategoria()));
+		if(encuestaAConvertir.getListaUsuariosEncuesta() != null)
+			encuestaConvertido.setListaUsuarios(UsuarioConverter.converterListaModeloADtoSimple(encuestaAConvertir.getListaUsuariosEncuesta()));
 		return encuestaConvertido;
 	}
 
@@ -58,6 +60,8 @@ public class EncuestaConverter {
 			encuestaConvertido.setPreguntas(PreguntaConverter.converterListaDtoAModeloCompleto(encuestaAConvertir.getPreguntas()));
 		if(encuestaAConvertir.getCategoria() != null)
 			encuestaConvertido.setCategoria(CategoriaConverter.converterDtoAModeloSimple(encuestaAConvertir.getCategoria()));
+		if(encuestaAConvertir.getListaUsuarios() != null)
+			encuestaConvertido.setListaUsuariosEncuesta(UsuarioConverter.converterListaDtoAModeloSimple(encuestaAConvertir.getListaUsuarios()));
 		return encuestaConvertido;
 	}
 
@@ -65,6 +69,21 @@ public class EncuestaConverter {
 		List<EncuestaDTO> listaEncuestasConvertidos = new ArrayList<>();
 		for(Encuesta encuestaAConvertir: listaEncuestaAConvertir) {
 			listaEncuestasConvertidos.add(converterModeloADtoCompleto(encuestaAConvertir));
+		}
+		return listaEncuestasConvertidos;
+	}
+	
+	public static EncuestaDTO converterModeloADtoCompletoCategoria(Encuesta encuestaAConvertir) {
+		EncuestaDTO encuestaConvertido = converterModeloADtoSimple(encuestaAConvertir);
+		if(encuestaAConvertir.getCategoria() != null)
+			encuestaConvertido.setCategoria(CategoriaConverter.converterModeloADtoSimple(encuestaAConvertir.getCategoria()));
+		return encuestaConvertido;
+	}
+	
+	public static List<EncuestaDTO> converterListaModeloADtoCategoria(List<Encuesta> listaEncuestaAConvertir) {
+		List<EncuestaDTO> listaEncuestasConvertidos = new ArrayList<>();
+		for(Encuesta encuestaAConvertir: listaEncuestaAConvertir) {
+			listaEncuestasConvertidos.add(converterModeloADtoCompletoCategoria(encuestaAConvertir));
 		}
 		return listaEncuestasConvertidos;
 	}

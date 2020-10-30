@@ -1,6 +1,7 @@
 package com.desarrollo.luis.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
 
@@ -23,6 +24,8 @@ public class UsuarioDTO {
 	private Date fechaNacimiento;
 	
 	private RolDTO rolUsuario;
+	
+	private List<EncuestaDTO> listaEncuestas;
 
 	public Integer getId() {
 		return id;
@@ -102,6 +105,14 @@ public class UsuarioDTO {
 
 	public void setRolUsuario(RolDTO rolUsuario) {
 		this.rolUsuario = rolUsuario;
+	}
+
+	public List<EncuestaDTO> getListaEncuestas() {
+		return listaEncuestas;
+	}
+
+	public void setListaEncuestas(List<EncuestaDTO> listaEncuestas) {
+		this.listaEncuestas = listaEncuestas;
 	}
 	
 }

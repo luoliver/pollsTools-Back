@@ -19,11 +19,17 @@ public class UsuarioConverter {
 		usuarioConvertido.setPrimerNombre(usuarioAConvertir.getPrimerNombre());
 		usuarioConvertido.setSegundoNombre(usuarioAConvertir.getSegundoNombre());
 		usuarioConvertido.setUsuario(usuarioAConvertir.getUsuario());
-		
 		usuarioConvertido.setRolUsuario(RolConverter.converterModeloADtoSimple(usuarioAConvertir.getRolUsuario()));
 		return usuarioConvertido;
 	}
 
+	public static UsuarioDTO converterModeloADtoCompleto(Usuario usuarioAConvertir) {
+		UsuarioDTO usuarioConvertido = converterModeloADtoSimple(usuarioAConvertir);
+		if(usuarioAConvertir.getListaEncuestasUsuario() != null)
+			usuarioConvertido.setListaEncuestas(EncuestaConverter.converterListaModeloADtoSimple(usuarioAConvertir.getListaEncuestasUsuario()));
+		return usuarioConvertido;
+	}
+	
 	public static Usuario converterDtoAModeloSimple(UsuarioDTO usuarioAConvertir) {
 		Usuario usuarioConvertido = new Usuario();
 		usuarioConvertido.setContrasena(usuarioAConvertir.getContrasena());
@@ -40,6 +46,13 @@ public class UsuarioConverter {
 		return usuarioConvertido;
 	}
 
+	public static Usuario converterDtoAModeloCompleto(UsuarioDTO usuarioAConvertir) {
+		Usuario usuarioConvertido = converterDtoAModeloSimple(usuarioAConvertir);
+		if(usuarioAConvertir.getListaEncuestas() != null)
+			usuarioConvertido.setListaEncuestasUsuario(EncuestaConverter.converterListaDtoAModeloSimple(usuarioAConvertir.getListaEncuestas()));
+		return usuarioConvertido;
+	}
+	
 	public static List<UsuarioDTO> converterListaModeloADtoSimple(List<Usuario> listaUsuarioAConvertir) {
 		List<UsuarioDTO> listaUsuariosConvertidos = new ArrayList<>();
 		for(Usuario usuarioAConvertir: listaUsuarioAConvertir) {

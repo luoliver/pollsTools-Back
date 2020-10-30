@@ -9,13 +9,13 @@ import com.desarrollo.luis.controller.IRolService;
 import com.desarrollo.luis.converters.RolConverter;
 import com.desarrollo.luis.dto.RolDTO;
 import com.desarrollo.luis.model.Rol;
-import com.desarrollo.luis.repository.IRolDao;
+import com.desarrollo.luis.repository.IRolDAO;
 
 @Service
 public class RolService implements IRolService{
 
 	@Autowired
-	private IRolDao rol;
+	private IRolDAO rol;
 
 	@Override
 	public List<RolDTO> findRoles() {

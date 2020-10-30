@@ -10,7 +10,7 @@ public interface IUsuarioService {
 	
 	public UsuarioDTO crearUsuarioAdminsitrador(UsuarioDTO usuario);
 	
-	public UsuarioDTO crearUsuario(UsuarioDTO usuario);
+	public UsuarioDTO crearUsuario(UsuarioDTO usuario) throws Exception;
 	
 	public UsuarioDTO modificarUsuario(UsuarioDTO usuario);
 	

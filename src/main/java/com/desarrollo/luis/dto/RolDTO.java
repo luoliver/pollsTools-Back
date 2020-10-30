@@ -2,11 +2,13 @@ package com.desarrollo.luis.dto;
 
 import java.util.List;
 
+import com.desarrollo.luis.enums.EnumRol;
+
 public class RolDTO {
 
 	private int idRol;
 	
-	private String nombre;
+	private EnumRol nombre;
 	
 	private List<UsuarioDTO> usuario;
 
@@ -18,11 +20,11 @@ public class RolDTO {
 		this.idRol = idRol;
 	}
 
-	public String getNombre() {
+	public EnumRol getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(EnumRol nombre) {
 		this.nombre = nombre;
 	}
 

@@ -18,36 +18,39 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
-	private UserService userDetailService;
+	private UserDetailsServiceImpl userDetailService;
 
 	@Autowired
-    private JwtAuthorizationFilter jwtAuthorizationFilter;
+	private AuthEntryPointJwt unauthorizateHandler;
 	
-	@Autowired
-	private BCryptPasswordEncoder bcrypt;
-
 	@Bean
 	public BCryptPasswordEncoder encriptadorContrasena() {
 		BCryptPasswordEncoder encriptador = new BCryptPasswordEncoder();
 		return encriptador;
 	}
 
+	@Bean
+	public JwtAuthorizationFilter authenticationJwtTokenFilter() {
+		return new JwtAuthorizationFilter();
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailService).passwordEncoder(bcrypt);
+		auth.userDetailsService(userDetailService).passwordEncoder(encriptadorContrasena());
 	}
 
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
-		 http
-         .csrf().disable()
-         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-         .and()
-         .authorizeRequests()
-         .antMatchers("/login").permitAll()
-         .antMatchers(HttpMethod.POST, "/Usuarios").permitAll()
-         .anyRequest().authenticated()
-         .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+		http.cors().and().csrf().disable()
+			.exceptionHandling().authenticationEntryPoint(unauthorizateHandler).and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+			.antMatchers("/api/polls/**").permitAll()
+			.antMatchers("/api/category/**").permitAll()
+			.antMatchers(HttpMethod.POST,"/api/users").permitAll()
+			.anyRequest().authenticated();
+         
+		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
  
     @Bean

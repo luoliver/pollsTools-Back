@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Encuesta {
@@ -18,22 +22,31 @@ public class Encuesta {
 	@Column(name = "idEncuesta")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "nombre", length = 50, nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "codigo", length = 50, nullable = false, unique = true)
 	private String codigo;
-	
+
 	@Column(name = "descripcion", length = 150, nullable = true)
 	private String descripcion;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idCategoria", nullable = false)
 	private Categoria categoria;
-	
+
 	@OneToMany(mappedBy = "encuesta")
 	private List<Pregunta> preguntas;
+
+	@JoinTable(
+			name = "EncuestaUsuario",
+			joinColumns = @JoinColumn(name = "FK_ENCUESTA", nullable = false),
+			inverseJoinColumns = @JoinColumn(name="FK_USUARIO", nullable = false)
+			)
+	@ManyToMany()
+	@JsonIgnore
+	private List<Usuario> listaUsuariosEncuesta;
 
 	public Integer getId() {
 		return id;
@@ -82,5 +95,13 @@ public class Encuesta {
 	public void setPreguntas(List<Pregunta> preguntas) {
 		this.preguntas = preguntas;
 	}
-	
+
+	public List<Usuario> getListaUsuariosEncuesta() {
+		return listaUsuariosEncuesta;
+	}
+
+	public void setListaUsuariosEncuesta(List<Usuario> listaUsuariosEncuesta) {
+		this.listaUsuariosEncuesta = listaUsuariosEncuesta;
+	}
+
 }
